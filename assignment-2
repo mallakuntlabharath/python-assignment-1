@@ -1,0 +1,29 @@
+import requests
+from bs4 import BeautifulSoup
+
+class Scraper:
+    def _init_(self,url,item):
+     # https://www.flipkart.com/search?q=mobiles
+        self.final_url = url + '/search?q=' + item
+        self.pull_data(self.final_url)
+
+    def pull_data(self, finalurl):
+        print(finalurl)
+        self.result = requests.get(finalurl)
+        
+       
+
+        self.soup = BeautifulSoup(self.result.content)
+        
+        
+        
+        self.tagline = self.soup.find('div',attrs={'class','_4rR01T'})
+        
+        print(self.tagline)
+        print(self.tagline.text)
+        
+        self.tagline = self.soup.find('div',attrs={'class','_30jeq3'})
+        print(self.tagline.text)
+        
+        self.tagline = self.soup.find('div',attrs={'class','_3LWZlK'})
+        print(self.tagline.text)
